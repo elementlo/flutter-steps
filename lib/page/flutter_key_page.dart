@@ -64,7 +64,19 @@ class _FlutterKeyState extends State<FlutterKeyPage> {
     list.insert(0, list.removeAt(1));
     setState(() {});
   }
+  
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print("flutter_key_page: didChangeDependencies");
+  }
 
+  @override
+  void didUpdateWidget(FlutterKeyPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print("flutter_key_page: didUpdateWidget");
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,6 +191,18 @@ class _StatefulContainerState extends State<StatefulContainer> {
   final Color color = Color.fromARGB(255, Random.secure().nextInt(255),
       Random.secure().nextInt(255), Random.secure().nextInt(255));
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print("StatefulContainer: didChangeDependencies");
+  }
+
+  @override
+  void didUpdateWidget(StatefulContainer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print("StatefulContainer: didUpdateWidget");
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Container(
