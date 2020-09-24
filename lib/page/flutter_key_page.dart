@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_steps/page/global_key_page.dart';
 
 class FlutterKeyPage extends StatefulWidget {
   @override
@@ -9,9 +10,11 @@ class FlutterKeyPage extends StatefulWidget {
     return _FlutterKeyState();
   }
 }
+final GlobalKey<SwitcherState> _globalKey = GlobalKey();
+
+SwitcherState get globalKey => _globalKey.currentState;
 
 class _FlutterKeyState extends State<FlutterKeyPage> {
-  final GlobalKey<SwitcherState> _globalKey = GlobalKey();
 
   List<Widget> stlWidgets = [
     StatelessContainer(),
@@ -96,6 +99,10 @@ class _FlutterKeyState extends State<FlutterKeyPage> {
               child: Text("Switch Color"),
               onPressed: () {
                 switchWidgets(stlWidgets);
+                //globalKey.changeState();
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => GlobalKeyPage()),
+                );
               },
             ),
 

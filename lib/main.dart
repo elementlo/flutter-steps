@@ -75,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             title: Text("Key in Flutter Widgets"),
             onTap: () {
+              //globalKey.changeState();
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => FlutterKeyPage()),
               );
