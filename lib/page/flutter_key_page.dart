@@ -69,19 +69,29 @@ class _FlutterKeyState extends State<FlutterKeyPage> {
   }
   
   @override
+  void initState() {
+    super.initState();
+    
+  }
+  
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     print("flutter_key_page: didChangeDependencies");
+    
+    
   }
 
   @override
   void didUpdateWidget(FlutterKeyPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     print("flutter_key_page: didUpdateWidget");
+    
   }
   
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("Key in Flutter Widgets"),

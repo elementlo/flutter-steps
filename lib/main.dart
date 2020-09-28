@@ -52,7 +52,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
+  
+  Future<void> appInit() async {}
+  
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -75,6 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             title: Text("Key in Flutter Widgets"),
             onTap: () {
+              appInit();
               //globalKey.changeState();
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => FlutterKeyPage()),
