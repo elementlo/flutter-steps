@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_steps/page/android_hybrid_composition_page.dart';
 import 'package:flutter_steps/page/flutter_key_page.dart';
+import 'package:flutter_steps/page/flutter_webview_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,37 +47,35 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
-  
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
+  Widget _buildItems({String title, IconData iconData, VoidCallback onTap}) {
+    return ListTile(
+      leading: Icon(
+        iconData,
+      ),
+      title: Text(title),
+      onTap: onTap,
+    );
+  }
+
   Future<void> appInit() async {}
-  
+
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: ListView(
         children: [
-          ListTile(
-            leading: Icon(
-              Icons.vpn_key,
-            ),
-            title: Text("Key in Flutter Widgets"),
+          _buildItems(
+            title: 'Key in Flutter Widgets',
+            iconData: Icons.vpn_key,
             onTap: () {
               appInit();
               //globalKey.changeState();
@@ -86,6 +86,29 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Divider(
             height: 1,
+          ),
+          _buildItems(
+            title: 'Flutter Webview',
+            iconData: Icons.web,
+            onTap: () {
+              //globalKey.changeState();
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => FlutterWebviewPage()),
+              );
+            },
+          ),
+          Divider(
+            height: 1,
+          ),
+          _buildItems(
+            title: 'Android Hybrid Composition',
+            iconData: Icons.add_to_home_screen,
+            onTap: () {
+              //globalKey.changeState();
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => AndroidHybridCompositionPage()),
+              );
+            },
           ),
         ],
       ),
