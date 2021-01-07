@@ -12,11 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
   aspectd:
-    git:
-      url: git@github.com:alibaba-flutter/aspectd.git
-      ref: v1.17.1
+    path: /Users/elemen/workspace/flutter/aspectd
   flutter_steps:
-    path: ../
+    path: ../flutter-steps
 
 dev_dependencies:
   flutter_test:

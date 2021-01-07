@@ -1,7 +1,0 @@
-builders:
-  annotationBuilder:
-    import: "package:flutter_steps/builder.dart"
-    builder_factories: ["annotationBuilder"]
-    build_extensions: {".dart": [".g.part"]}
-    auto_apply: root_package
-    build_to: source
