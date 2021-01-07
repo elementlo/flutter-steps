@@ -1,0 +1,164 @@
+# Specify analysis options.
+#
+# Until there are meta linter rules, each desired lint must be explicitly enabled.
+# See: https://github.com/dart-lang/linter/issues/288
+#
+# For a list of lints, see: http://dart-lang.github.io/linter/lints/
+# See the configuration guide for more
+# https://github.com/dart-lang/sdk/tree/master/pkg/analyzer#configuring-the-analyzer
+#
+# There are other similar analysis options files in the flutter repos,
+# which should be kept in sync with this file:
+#
+#   - analysis_options.yaml (this file)
+#   - packages/flutter/lib/analysis_options_user.yaml
+#   - https://github.com/flutter/plugins/blob/master/analysis_options.yaml
+#   - https://github.com/flutter/engine/blob/master/analysis_options.yaml
+#
+# This file contains the analysis options used by Flutter tools, such as IntelliJ,
+# Android Studio, and the `flutter analyze` command.
+
+# 以下include二选一, 另需要在pub里添加依赖
+include: package:pedantic/analysis_options.yaml
+# include: package:effective_dart/analysis_options.yaml
+
+analyzer:
+  strong-mode:
+    implicit-casts: true
+    implicit-dynamic: true
+  errors:
+    # 当缺少必要参数时警告(而不是在编译器中提示)
+    missing_required_param: warning
+    # 当缺少返回值时警告(而不是在编译器中提示)
+    missing_return: warning
+    # 当泄露StreamController时报错
+    close_sinks: error
+    prefer_void_to_null: error
+    prefer_typing_uninitialized_variables: error
+    cancel_subscriptions: error
+
+  exclude:
+    - "bin/cache/**"
+    # the following two are relative to the stocks example and the flutter package respectively
+    # see https://github.com/dart-lang/sdk/issues/28463
+    - "lib/i18n/messages_*.dart"
+    - "lib/src/http/**"
+    - "test/**"
+    - "script/**"
+
+linter:
+  rules:
+    # Errors Rules:
+    # StreamController需要主动关闭
+    - close_sinks
+    # 总是要声明返回值类型
+    - always_declare_return_types
+    # 命名参数必须不能为空
+    - always_require_non_null_named_parameters
+    # 避免bool字面值出现在条件表达式中
+    - avoid_bool_literals_in_conditional_expressions
+    # 避免类中只有静态成员
+    - avoid_classes_with_only_static_members
+    # 避免空的else表达式
+    - avoid_empty_else
+    # 在等于判断中避免检查null
+    - avoid_null_checks_in_equality_operators
+    # 避免使用相对路径导入lib
+    - avoid_relative_lib_imports
+    # 避免在setters方法中有返回值
+    - avoid_return_types_on_setters
+    # 在void方法中避免主动返回null
+    - avoid_returning_null_for_void
+    # 避免使用dart io包中过于耗时的api, 见: https://dart-lang.github.io/linter/lints/avoid_slow_async_io.html
+    - avoid_slow_async_io
+    # 避免使用类型名作为参数名字
+    - avoid_types_as_parameter_names
+    # 避免使用没有使用过的构造函数参数
+    - avoid_unused_constructor_parameters
+    # 异步方法必须声明类型为Future的返回值
+    - avoid_void_async
+    # 只能在futures上使用wait等待
+    - await_only_futures
+    # 避免空catches语句
+    - empty_catches
+    # 主动取消订阅
+    - cancel_subscriptions
+    # 流程控制代码避免在finally里定义流程
+    - control_flow_in_finally
+    # 避免空构造方法
+    - empty_constructor_bodies
+    # 避免空的条件语句
+    - empty_statements
+    # 在list移除元素时只能使用元素类型来移除
+    - list_remove_unrelated_type
+
+    # Styles Rules:
+    # 扩展方法使用大驼峰
+    - camel_case_extensions
+    # 类名和类型定义使用大驼峰
+    - camel_case_types
+    # 下划线小写来命名library
+    - library_names
+    # 使用小写命名library别名
+    - library_prefixes
+    # 使用小驼峰命名变量
+    - non_constant_identifier_names
+    # 不要重写变量
+    - overridden_fields
+    # 在构造方法的初始化器中使用断言检查
+    - prefer_asserts_in_initializer_lists
+    # 使用??=来判空
+    - prefer_conditional_assignment
+    # 使用const来初始化const类
+    - prefer_const_constructors
+    # 使用const修饰注解为immutable的类的构造函数
+    - prefer_const_constructors_in_immutables
+    # 使用contains代替index of
+    - prefer_contains
+    # 使用if代替三目表达式
+    - prefer_if_elements_to_conditional_expressions
+    # 使用??代替三目表达式
+    - prefer_if_null_operators
+    # 使用isEmpty/isNotEmpty代替判断length
+    - prefer_is_empty
+    - prefer_is_not_empty
+    # 使用is!代替!()
+    - prefer_is_not_operator
+    # 避免声明没有初始值不定类型的变量
+    - prefer_typing_uninitialized_variables
+    # 返回值使用void代替null
+    - prefer_void_to_null
+    # 不要创建返回自身的getter方法
+    - recursive_getters
+    # 不必要的const修饰
+    - unnecessary_const
+    # 避免不必要的getters/setters
+    # note: dart不像java或者C#需要避免暴露类的成员变量, dart没有这个限制, 具体参见:
+    # https://dart-lang.github.io/linter/lints/unnecessary_getters_setters.html
+    - unnecessary_getters_setters
+    # 新版dart sdk省略了new关键字
+    - unnecessary_new
+    # 避免在??=右侧使用null
+    - unnecessary_null_aware_assignments
+    # 避免在??中使用null
+    - unnecessary_null_in_if_null_operators
+    # 不要只是在重写方法中只是为了调用父类方法
+    - unnecessary_overrides
+    # 避免不必要的括号
+    - unnecessary_parenthesis
+    # 避免不必要的$符号插入
+    - unnecessary_string_interpolations
+    # 不必要的this关键字
+    - unnecessary_this
+    # 避免类型不匹配的等于判断
+    - unrelated_type_equality_checks
+    # 在catch中继续抛出需要抛出的异常
+    - use_rethrow_when_possible
+    # 正则表达式检查
+    - valid_regexps
+    # 泛型中不要分配void
+    - void_checks
+
+    # Pub Rules:
+    # 使用下划线加小写命名包名
+    - package_names
